@@ -8,13 +8,13 @@ from ._meta import TableCache, TableMeta
 
 
 class Table(Model, metaclass=TableMeta):
-    """Base class for basic-db tables.
+    """Base class for easydatastore tables.
 
     ### Usage
 
     ```python
-    import basic_db.exceptions
-    from basic_db import Column, Table
+    import easydatastore.exceptions
+    from easydatastore import Column, Table
 
 
     class Person(Table):
@@ -42,7 +42,7 @@ class Table(Model, metaclass=TableMeta):
     Person.delete(Person.get("Crackle"))
     print([person.name for person in Person.all()])  # ["Snap", "Pop", "Tony"]
 
-    # basic-db will validate uniqueness for you... these operations will raise exceptions:
+    # easydatastore will validate uniqueness for you... these operations will raise exceptions:
     try:
         tony.email = Person.get("Snap").email
     except ValueError as e:
@@ -50,7 +50,7 @@ class Table(Model, metaclass=TableMeta):
 
     try:
         Person(name="Snap", family_name="Rice", age=1)
-    except basic_db.exceptions.DuplicateUniqueFieldValueError as e:
+    except easydatastore.exceptions.DuplicateUniqueFieldValueError as e:
         print(e.args[0])  # DuplicateUniqueFieldValueError
 
     ```
@@ -90,7 +90,7 @@ class Table(Model, metaclass=TableMeta):
         ### Example
 
         ```python
-        from basic_db import Table
+        from easydatastore import Table
 
         class Person(Table):
             name: str

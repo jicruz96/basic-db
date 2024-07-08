@@ -1,5 +1,5 @@
 
-# `basic-db` - Create type-safe, in-memory datastores 
+# `easydatastore` - Create type-safe, in-memory datastores 
 
 ## Requirements
 * Python 3.11+
@@ -7,16 +7,16 @@
 ## Install
 
 ```bash
-pip install basic-db
+pip install easydatastore
 ```
 
 ## Usage
 
-If you want to prototype a web application quickly and just need a way to validate your mock data, you can use `basic-db` to create an in-memory datastore for your models, directly out of the box.
+If you want to prototype a web application quickly and just need a way to validate your mock data, you can use `easydatastore` to create an in-memory datastore for your models, directly out of the box.
 
 ### Features:
 
-* In-memory tables for your models with `basic_db.Table`, with a familiar pydantic-flavored syntax and ORM-like API.
+* In-memory tables for your models with `easydatastore.Table`, with a familiar pydantic-flavored syntax and ORM-like API.
 * Enforce uniqueness constraints with `Column(unique=True)`
 * Use indexing for faster lookups with `Column(index=True)`
 * IDE-friendly type hints ensure your coding experience is type-safe.
@@ -24,8 +24,8 @@ If you want to prototype a web application quickly and just need a way to valida
 ### Example
 
 ```python
-import basic_db.exceptions
-from basic_db import Column, Table
+import easydatastore.exceptions
+from easydatastore import Column, Table
 
 
 class Person(Table):
@@ -53,7 +53,7 @@ print([person.name for person in Person.filter(lambda person: person.age < 90)])
 Person.delete(Person.get("Crackle"))
 print([person.name for person in Person.all()])  # ["Snap", "Pop", "Tony"]
 
-# basic-db will validate uniqueness for you... these operations will raise exceptions:
+# easydatastore will validate uniqueness for you... these operations will raise exceptions:
 try:
     tony.email = Person.get("Snap").email
 except ValueError as e:
@@ -61,7 +61,7 @@ except ValueError as e:
 
 try:
     Person(name="Snap", family_name="Rice", age=1)
-except basic_db.exceptions.DuplicateUniqueFieldValueError as e:
+except easydatastore.exceptions.DuplicateUniqueFieldValueError as e:
     print(e.args[0])  # DuplicateUniqueFieldValueError
 
 ```

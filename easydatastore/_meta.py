@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Callable, Generic, Sequence, TypeVar, Union, cast
 
-from basic_db.column import ColumnInfo
+from easydatastore.column import ColumnInfo
 
 from .exceptions import DuplicateUniqueFieldValueError, ModelNotFoundError, NoPrimaryKeyError
 

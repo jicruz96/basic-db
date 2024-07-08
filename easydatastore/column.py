@@ -68,7 +68,7 @@ def Column(
 
 
 class ColumnInfo(FieldInfo):
-    """Represents a column in a basic-db model.
+    """Represents a column in a easydatastore model.
 
     Attributes:
         default: default column value.

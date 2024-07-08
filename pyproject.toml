@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "basic-db"
+name = "easydatastore"
 version = "0.1.0"
 description = "The easiest way to create type-safe, in-memory datastores for your models."
 authors = ["J.I. Cruz <hello@jicruz.com>"]
 readme = "README.md"
-repository = "https://github.com/jicruz96/basic-db"
+repository = "https://github.com/jicruz96/easydatastore"
 keywords = [
   "data validation",
   "dataclasses",
@@ -17,7 +17,6 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
 ]
-packages = [{ include = "basic_db", from = "." }]
 
 
 [tool.poetry.dependencies]
