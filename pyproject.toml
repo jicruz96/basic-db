@@ -1,0 +1,59 @@
+[tool.poetry]
+name = "basic-db"
+version = "0.1.0"
+description = "The easiest way to create type-safe, in-memory datastores for your models."
+authors = ["J.I. Cruz <hello@jicruz.com>"]
+readme = "README.md"
+keywords = [
+  "data validation",
+  "dataclasses",
+  "validation",
+  "models",
+  "meta-programming",
+]
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+packages = [{ include = "basic_db", from = "." }]
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+easydatamodel = "*"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+flake8 = "^6.0.0"
+isort = "^5.12.0"
+pre-commit = "^3.0.4"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | \venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+)
+'''
