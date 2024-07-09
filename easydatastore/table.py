@@ -4,10 +4,12 @@ from typing import Any, Callable, Literal, Optional, Self, Sequence, overload
 
 from easydatamodel.model import Model
 
+from easydatastore.column import ColumnInfo
+
 from ._meta import TableCache, TableMeta
 
 
-class Table(Model, metaclass=TableMeta):
+class Table(Model[ColumnInfo], metaclass=TableMeta):
     """Base class for easydatastore tables.
 
     ### Usage
@@ -56,6 +58,7 @@ class Table(Model, metaclass=TableMeta):
     ```
     """
 
+    __field_class__ = ColumnInfo
     __cache__: TableCache[Self]
 
     def __init__(self, **kwargs: Any):

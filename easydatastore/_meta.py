@@ -3,6 +3,8 @@ from __future__ import annotations
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any, Callable, Generic, Sequence, TypeVar, Union, cast
 
+from easydatamodel.field import ModelFieldMap
+
 from easydatastore.column import ColumnInfo
 
 from .exceptions import DuplicateUniqueFieldValueError, ModelNotFoundError, NoPrimaryKeyError
@@ -16,16 +18,15 @@ T = TypeVar("T", bound="Table")
 
 
 class TableMeta(ModelMeta):
-    __fields_class__ = ColumnInfo
 
     def __new__(mcs, class_name: str, bases: tuple[type, ...], namespace: dict[str, Any]) -> type["Table"]:
-        cls: type["Table"] = ModelMeta.__new__(mcs, class_name, bases, namespace)  # type: ignore
+        cls = cast(type["Table"], super().__new__(mcs, class_name, bases, namespace))  # type: ignore
         cls.__cache__ = TableCache(cls)
         return cls
 
     @property
     def columns(cls) -> list[ColumnInfo]:
-        return list(cast(dict[str, ColumnInfo], cls.__fields_map__).values())
+        return list(cast(ModelFieldMap[ColumnInfo], cls.__fields_map__).values())  # type: ignore
 
     @property
     def pk(cls) -> ColumnInfo | None:
