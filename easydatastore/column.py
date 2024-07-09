@@ -33,6 +33,7 @@ def Column(
     Attributes:
         default: default column value.
         default_factory: 0-argument function called to initialize a column's value.
+        type: the column's type. If not provided, the type will be inferred from type hints.
         init: if True, the column will be a parameter to the class's __init__() function. If False, it is up to the
             caller to set a default or a default_factory.
         primary_key: if True, the column will be the primary key for the model.
@@ -73,6 +74,7 @@ class ColumnInfo(FieldInfo):
     Attributes:
         default: default column value.
         default_factory: 0-argument function called to initialize a column's value.
+        type: the column's type. If not provided, the type will be inferred from type hints.
         init: if True, the column will be a parameter to the class's __init__() function. If False, it is up to the
             caller to set a default or a default_factory.
         primary_key: if True, the column will be the primary key for the model.
@@ -145,11 +147,11 @@ class ColumnInfo(FieldInfo):
     def owner(self) -> type["Table"] | None:
         return typing.cast(type["Table"], super().owner)
 
-    def __set__(self, instance: Model, value: typing.Any) -> None:
+    def __set__(self, instance: Model[ColumnInfo], value: typing.Any) -> None:
         assert self.owner is not None and isinstance(instance, self.owner)
         if self.name in instance.__dict__:
             self.owner.__cache__.update_model(instance, self, value)
-        super().__set__(instance, value)
+        super().__set__(instance, value)  # type: ignore
 
     def copy(self) -> ColumnInfo:
         """Return a copy of the field without its owner and name values set so it can be used in another class."""
