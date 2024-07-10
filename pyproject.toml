@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "easydatastore"
-version = "0.1.2"
+version = "0.1.3"
 description = "The easiest way to create type-safe, in-memory datastores for your models."
 authors = ["J.I. Cruz <hello@jicruz.com>"]
 readme = "README.md"
@@ -21,7 +21,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-easydatamodel = ">=0.0.6"
+easydatamodel = ">=0.1.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
