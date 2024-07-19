@@ -1,5 +1,6 @@
+from .exceptions import DuplicateUniqueFieldValueError as DuplicateUniqueFieldValueError, ModelNotFoundError as ModelNotFoundError, NoPrimaryKeyError as NoPrimaryKeyError
 from .table import Table as Table
-from _typeshed import Incomplete as Incomplete
+from _typeshed import Incomplete
 from easydatamodel._meta import ModelMeta
 from easydatastore.column import ColumnInfo as ColumnInfo
 from typing import Any, Callable, Generic, Sequence, TypeVar

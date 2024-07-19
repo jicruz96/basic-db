@@ -1,10 +1,9 @@
 import typing
 from .table import Table as Table
-from _typeshed import Incomplete as Incomplete
+from _typeshed import Incomplete
 from collections.abc import Callable as Callable, Mapping
 from easydatamodel._typing import UnassignedType as UnassignedType
 from easydatamodel.field import FieldInfo
-from easydatamodel.model import Model as Model
 
 CLASS_VAR_PATTERN: Incomplete
 
@@ -20,5 +19,5 @@ class ColumnInfo(FieldInfo):
     def index(self) -> bool: ...
     @property
     def owner(self) -> type['Table'] | None: ...
-    def __set__(self, instance: Model[ColumnInfo], value: typing.Any) -> None: ...
+    def __set__(self, instance: Table, value: typing.Any) -> None: ...
     def copy(self) -> ColumnInfo: ...
