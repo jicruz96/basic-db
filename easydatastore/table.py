@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from typing import Any, Callable, Literal, Optional, Self, Sequence, overload
 
-from easydatamodel.model import Model
+from easydatamodel.model import _GenericModel  # type: ignore
 
 from easydatastore.column import ColumnInfo
 
 from ._meta import TableCache, TableMeta
 
 
-class Table(Model[ColumnInfo], metaclass=TableMeta):
+class Table(_GenericModel[ColumnInfo], metaclass=TableMeta):
     """Base class for easydatastore tables.
 
     ### Usage
@@ -59,7 +59,7 @@ class Table(Model[ColumnInfo], metaclass=TableMeta):
     """
 
     __field_class__ = ColumnInfo
-    __cache__: TableCache[Self]
+    __cache__: TableCache["Table"]  # type: ignore
 
     def __init__(self, **kwargs: Any):
         super().__init__(**kwargs)
@@ -71,14 +71,14 @@ class Table(Model[ColumnInfo], metaclass=TableMeta):
         cls.__cache__.delete(instance_or_instances)
 
     @classmethod
-    def all(cls) -> Sequence[Self]:
+    def all(cls) -> Sequence["Table"]:
         """Retrieve all instances of the model."""
         return cls.__cache__.all
 
     @classmethod
     def filter(
-        cls, filter_func: Callable[[Self], bool] | None = None, *, error_if_not_found: bool = False, **kwargs: Any
-    ) -> Sequence[Self]:
+        cls, filter_func: Callable[["Table"], bool] | None = None, *, error_if_not_found: bool = False, **kwargs: Any
+    ) -> Sequence["Table"]:
         """Filter instances, using either a filter function or keyword arguments.
 
         Args:
@@ -106,16 +106,16 @@ class Table(Model[ColumnInfo], metaclass=TableMeta):
 
     @overload
     @classmethod
-    def get(cls, pk: Any, error_if_not_found: Literal[True]) -> Self: ...  # noqa: E704
+    def get(cls, pk: Any, error_if_not_found: Literal[True]) -> "Table": ...  # noqa: E704
 
     @overload
     @classmethod
-    def get(cls, pk: Any, error_if_not_found: Literal[False]) -> Optional[Self]: ...  # noqa: E704
+    def get(cls, pk: Any, error_if_not_found: Literal[False]) -> Optional["Table"]: ...  # noqa: E704
 
     @overload
     @classmethod
-    def get(cls, pk: Any) -> Self: ...  # noqa: E704
+    def get(cls, pk: Any) -> "Table": ...  # noqa: E704
 
     @classmethod
-    def get(cls, pk: Any, error_if_not_found: bool = True) -> Self | None:
+    def get(cls, pk: Any, error_if_not_found: bool = True) -> Optional["Table"]:
         return cls.__cache__.get(pk, error_if_not_found=error_if_not_found)

@@ -7,7 +7,6 @@ from collections.abc import Callable, Mapping
 from easydatamodel._typing import UNASSIGNED, UnassignedType
 from easydatamodel.exceptions import InvalidFieldError
 from easydatamodel.field import FieldInfo
-from easydatamodel.model import Model
 
 CLASS_VAR_PATTERN = re.compile(r"(typing\.)?ClassVar(\[(?P<inner_type>.*)\])?")
 
@@ -147,10 +146,10 @@ class ColumnInfo(FieldInfo):
     def owner(self) -> type["Table"] | None:
         return typing.cast(type["Table"], super().owner)
 
-    def __set__(self, instance: Model[ColumnInfo], value: typing.Any) -> None:
+    def __set__(self, instance: "Table", value: typing.Any) -> None:  # type: ignore
         assert self.owner is not None and isinstance(instance, self.owner)
         if self.name in instance.__dict__:
-            self.owner.__cache__.update_model(instance, self, value)
+            self.owner.__cache__.update_model(instance, self, value)  # type: ignore
         super().__set__(instance, value)  # type: ignore
 
     def copy(self) -> ColumnInfo:
