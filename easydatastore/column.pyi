@@ -1,6 +1,6 @@
 import typing
 from .table import Table as Table
-from _typeshed import Incomplete
+from _typeshed import Incomplete as Incomplete
 from collections.abc import Callable as Callable, Mapping
 from easydatamodel._typing import UnassignedType as UnassignedType
 from easydatamodel.field import FieldInfo
