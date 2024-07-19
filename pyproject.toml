@@ -21,7 +21,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-easydatamodel = ">=0.3.0"
+easydatamodel = ">=0.3.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
